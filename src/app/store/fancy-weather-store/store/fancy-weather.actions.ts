@@ -9,3 +9,12 @@ export const changeBackgroundImageAction = createAction(
 export const getRequestForImgAction = createAction(
   FancyWeatherActions.GET_SRC_IMG_REQUEST_ACTION
 );
+
+export const getRequestForIPAction = createAction(
+  FancyWeatherActions.GET_IP_REQUEST_ACTION
+);
+
+export const changeLatLngAction = createAction(
+  FancyWeatherActions.CHANGE_LAT_LNG_ACTION,
+  (coordinates: any) => ({ coordinates })
+);

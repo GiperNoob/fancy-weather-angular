@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { getRequestForImgAction } from './store/fancy-weather-store/store/fancy-weather.actions';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { GET_SRC_SELECTOR } from './store/fancy-weather-store/store/fancy-weather.selectors';
 
 @Component({
@@ -9,15 +9,20 @@ import { GET_SRC_SELECTOR } from './store/fancy-weather-store/store/fancy-weathe
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy {
   src$!: Observable<string>;
   backGroundImage!: string;
+  subscription!: Subscription;
 
   constructor(private store$: Store) {}
 
   ngOnInit(): void {
     this.store$.dispatch(getRequestForImgAction());
     this.src$ = this.store$.pipe(select(GET_SRC_SELECTOR));
-    this.src$.subscribe(v => this.backGroundImage = `url(${v})`);
+    this.subscription = this.src$.subscribe((src) => this.backGroundImage = `url(${src})`);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
