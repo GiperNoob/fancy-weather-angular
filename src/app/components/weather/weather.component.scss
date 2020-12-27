@@ -1,0 +1,45 @@
+.info__text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 35px;
+  margin-top: 125px;
+}
+
+.info__text span {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 37px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.lio {
+  position: absolute;
+  width: 220px;
+  top: 160px;
+}
+
+.little-ring-overcast {
+  position: absolute;
+  width: 15px;
+}
+
+.weather__inform-container {
+  display: flex;
+}
+
+.weather__degrees span {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-size: 306px;
+  line-height: 373px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.big-ring {
+  position: absolute;
+  width: 90px;
+}

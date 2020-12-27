@@ -1,0 +1,12 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <input
+    formControlName="searchField"
+    type="text"
+    class="search-field"
+    placeholder="Search city"
+  />
+
+  <button class="btn btn-submit" type="submit" [disabled]="form.invalid">
+    {{ "search" | uppercase }}
+  </button>
+</form>
