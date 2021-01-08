@@ -5,28 +5,24 @@ import {
   getRequestForImgAction,
   getRequestForIPAction,
   changeLatLngAction,
-} from './fancy-weather.actions';
-import {map, switchMap, tap} from 'rxjs/operators';
+} from '../../../components/inform/fancy-weather.actions';
+import { map, switchMap } from 'rxjs/operators';
 import { FancyWeatherService } from './services/fancy-weather.service';
-import {of} from 'rxjs';
 
 @Injectable()
 export class FancyWeatherEffects {
   loadImgSrc$ = createEffect(() => this.actions$.pipe(
       ofType(getRequestForImgAction),
     switchMap(() => this.fancyWeatherService.getSrcImg().pipe(
-      // @ts-ignore
-      map((data) => changeBackgroundImageAction(data.urls.regular))
+      map((data) => changeBackgroundImageAction(this.fancyWeatherService.getUrlImage(data)))
     ))
     )
   );
 
-  // @ts-ignore
   loadIP$ = createEffect(() => this.actions$.pipe(
     ofType(getRequestForIPAction),
     switchMap(() => this.fancyWeatherService.getIP().pipe(
-      // @ts-ignore
-      map((data) => changeLatLngAction(data.loc.split(','))
+      map((data) => changeLatLngAction(this.fancyWeatherService.getCoordinates(data))
     )),
    ))
   );

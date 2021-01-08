@@ -1,24 +1,16 @@
 import {createReducer, on} from '@ngrx/store';
-import {changeBackgroundImageAction, changeLatLngAction} from './fancy-weather.actions';
+import {changeBackgroundImageAction, changeLatLngAction} from '../../../components/inform/fancy-weather.actions';
+import { IFancyWeatherState } from '../../../interfaces/interfaces';
 
 export const FWA_STORE = 'store';
-
-export interface ICoordinates {
-  lat: number;
-  lng: number;
-}
-
-export interface IFancyWeatherState {
-  src: string;
-  coordinates: ICoordinates;
-}
 
 const FANCY_WEATHER_INIT_STATE: IFancyWeatherState = {
   src: '',
   coordinates: {
     lat: 51.678418,
     lng: 7.809007,
-  }
+  },
+  date: Date.now(),
 };
 
 export const fancyWeatherReducer = createReducer(
@@ -31,13 +23,10 @@ export const fancyWeatherReducer = createReducer(
     changeLatLngAction,
     (
       state,
-      data
+      {coordinates}
     ) =>  ({
       ...state,
-      coordinates: {
-        lat: data.coordinates[0],
-        lng: data.coordinates[1],
-      }
+      coordinates,
     })
   ),
 );
