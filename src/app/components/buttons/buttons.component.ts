@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Store} from '@ngrx/store';
-import {getRequestForImgAction} from '../../store/fancy-weather-store/store/fancy-weather.actions';
+import {getRequestForImgAction} from '../inform/fancy-weather.actions';
 
 @Component({
   selector: 'app-buttons',

@@ -1,4 +1,4 @@
 <div class="degrees-container">
-  <div class="latitude">latitude: {{ lat }}</div>
-  <div class="longitude">longitude: {{ lng }}</div>
+  <div class="latitude">latitude: {{ lat | async }}</div>
+  <div class="longitude">longitude: {{ lng | async }}</div>
 </div>

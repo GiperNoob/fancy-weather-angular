@@ -1,5 +1,6 @@
 import { createAction } from '@ngrx/store';
-import { FancyWeatherActions } from '../../../constants/action-constants';
+import { FancyWeatherActions } from '../../constants/action-constants';
+import {ICoordinates} from '../../interfaces/interfaces';
 
 export const changeBackgroundImageAction = createAction(
   FancyWeatherActions.CHANGE_BACKGROUND_IMAGE,
@@ -16,5 +17,5 @@ export const getRequestForIPAction = createAction(
 
 export const changeLatLngAction = createAction(
   FancyWeatherActions.CHANGE_LAT_LNG_ACTION,
-  (coordinates: any) => ({ coordinates })
+  (coordinates: ICoordinates) => ({ coordinates })
 );

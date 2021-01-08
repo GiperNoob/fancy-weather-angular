@@ -4,7 +4,7 @@
   </div>
 
   <div>
-    <span class="date">20.12.2020</span>
-    <span class="date">6:00:00</span>
+    <span class="date">{{date | async | date}}</span>
+    <span class="date">{{clock | async | date:'h:mm:ss'}}</span>
   </div>
 </div>

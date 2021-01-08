@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {Observable, Subscription} from 'rxjs';
-import {GET_LAT_LNG_SELECTOR} from '../../store/fancy-weather-store/store/fancy-weather.selectors';
-import {ICoordinates} from '../../store/fancy-weather-store/store/fancy-weather.reducer';
-import {getRequestForIPAction} from '../../store/fancy-weather-store/store/fancy-weather.actions';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { getCoordinates } from '../../store/fancy-weather-store/store/fancy-weather.selectors';
+import { getRequestForIPAction } from '../inform/fancy-weather.actions';
+import { ICoordinates } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-map',
@@ -12,7 +12,7 @@ import {getRequestForIPAction} from '../../store/fancy-weather-store/store/fancy
 })
 
 export class MapComponent implements OnInit, OnDestroy {
-  coordinates$: Observable<ICoordinates> = this.store$.pipe(select(GET_LAT_LNG_SELECTOR));
+  coordinates$: Observable<ICoordinates> = this.store$.pipe(select(getCoordinates));
   lat!: number;
   lng!: number;
   subscription!: Subscription;
@@ -30,5 +30,4 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

@@ -1,14 +1,30 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {FWA_STORE, ICoordinates, IFancyWeatherState} from './fancy-weather.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { FWA_STORE } from './fancy-weather.reducer';
+import { ICoordinates, IFancyWeatherState } from '../../../interfaces/interfaces';
 
 const GET_FEATURE = createFeatureSelector<IFancyWeatherState>(FWA_STORE);
 
-export const GET_SRC_SELECTOR = createSelector(
+export const getCoordinates = createSelector(
+  GET_FEATURE,
+  (state): ICoordinates => state.coordinates
+);
+
+export const getSrcSelector = createSelector(
   GET_FEATURE,
   (state): string => state.src
 );
 
-export const GET_LAT_LNG_SELECTOR = createSelector(
+export const getLatSelector = createSelector(
+  getCoordinates,
+  (coordinates) => coordinates.lat
+);
+
+export const getLngSelector = createSelector(
+  getCoordinates,
+  (coordinates) => coordinates.lng
+);
+
+export const getDateSelector = createSelector(
   GET_FEATURE,
-  (state): ICoordinates => state.coordinates
+  (state): number => state.date
 );
