@@ -1,28 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  changeBackgroundImageAction,
-  getRequestForImgAction,
-  getRequestForIPAction,
-  changeLatLngAction,
+  setBackgroundImageAction,
+  getImgAction,
+  getIPAction,
+  setLatLngAction,
+  getWeatherAction,
+  setWeatherAction,
 } from '../../../components/inform/fancy-weather.actions';
 import { map, switchMap } from 'rxjs/operators';
 import { FancyWeatherService } from './services/fancy-weather.service';
 
 @Injectable()
 export class FancyWeatherEffects {
-  loadImgSrc$ = createEffect(() => this.actions$.pipe(
-      ofType(getRequestForImgAction),
+  getImgSrc$ = createEffect(() => this.actions$.pipe(
+      ofType(getImgAction),
     switchMap(() => this.fancyWeatherService.getSrcImg().pipe(
-      map((data) => changeBackgroundImageAction(this.fancyWeatherService.getUrlImage(data)))
+      map((data) => setBackgroundImageAction(this.fancyWeatherService.getUrlImage(data)))
     ))
     )
   );
 
-  loadIP$ = createEffect(() => this.actions$.pipe(
-    ofType(getRequestForIPAction),
+  getWeather$ = createEffect(() => this.actions$.pipe(
+      ofType(getWeatherAction),
+    switchMap(() => this.fancyWeatherService.getWeather().pipe(
+      map((weather) => setWeatherAction(weather))
+    ))
+    )
+  );
+
+  getIP$ = createEffect(() => this.actions$.pipe(
+    ofType(getIPAction),
     switchMap(() => this.fancyWeatherService.getIP().pipe(
-      map((data) => changeLatLngAction(this.fancyWeatherService.getCoordinates(data))
+      map((data) => setLatLngAction(this.fancyWeatherService.getCoordinates(data))
     )),
    ))
   );

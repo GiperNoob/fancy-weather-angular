@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { getCoordinates } from '../../store/fancy-weather-store/store/fancy-weather.selectors';
-import { getRequestForIPAction } from '../inform/fancy-weather.actions';
+import { getIPAction } from '../inform/fancy-weather.actions';
 import { ICoordinates } from '../../interfaces/interfaces';
 
 @Component({
@@ -20,7 +20,7 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private store$: Store) { }
 
   ngOnInit(): void {
-    this.store$.dispatch(getRequestForIPAction());
+    this.store$.dispatch(getIPAction());
     this.subscription = this.coordinates$.subscribe((coordinates) => {
       this.lat = coordinates.lat;
       this.lng = coordinates.lng;

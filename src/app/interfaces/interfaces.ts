@@ -48,8 +48,16 @@ export interface ICoordinates {
   lng: number;
 }
 
+export interface IWeatherToday {
+  temp: number;
+  feelsLike: number;
+  wind: number;
+  humidity: number;
+}
+
 export interface IFancyWeatherState {
   src: string;
   coordinates: ICoordinates;
   date: number;
+  weatherToday: IWeatherToday;
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Store} from '@ngrx/store';
-import {getRequestForImgAction} from '../inform/fancy-weather.actions';
+import {getImgAction} from '../inform/fancy-weather.actions';
 
 @Component({
   selector: 'app-buttons',
@@ -12,6 +12,6 @@ export class ButtonsComponent {
   }
 
   refreshBackGroundImg(): void {
-    this.store$.dispatch(getRequestForImgAction());
+    this.store$.dispatch(getImgAction());
   }
 }

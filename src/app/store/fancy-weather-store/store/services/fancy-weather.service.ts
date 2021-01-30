@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import {interval, Observable} from 'rxjs';
-import { IMG_URL, IP_API_KEY } from '../../../../constants/keys-constants';
-import { IDataCoordinates, IIPUser } from '../../../../interfaces/interfaces';
+import { IMG_URL, IP_API_KEY, WEATHER_URL } from '../../../../constants/keys-constants';
+import { ICoordinates, IDataCoordinates, IIPUser } from '../../../../interfaces/interfaces';
 import {map, share} from 'rxjs/operators';
 
 @Injectable({
@@ -20,13 +20,17 @@ export class FancyWeatherService {
     return this.httpClient.get<IDataCoordinates>(IP_API_KEY);
   }
 
-  getCoordinates(coordinates: IDataCoordinates): { lat: number, lng: number } {
+  getCoordinates(coordinates: IDataCoordinates): ICoordinates {
     const coordinatesArray = coordinates.loc.split(',');
     const data = {
       lat: Number(coordinatesArray[0]),
       lng: Number(coordinatesArray[1]),
     };
     return data;
+  }
+
+  getWeather():  Observable<any> {
+    return this.httpClient.get<any>(WEATHER_URL);
   }
 
   getUrlImage(data: IIPUser): string {
