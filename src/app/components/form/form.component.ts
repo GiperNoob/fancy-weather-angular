@@ -13,11 +13,11 @@ export class FormComponent implements OnInit {
     this.createForm();
   }
 
-  public onSubmit(): void { }
+  public onSubmit(): void {}
 
   private createForm(): void {
     this.form = new FormGroup({
-      searchField: new FormControl('', Validators.required)
+      searchField: new FormControl('', Validators.required),
     });
   }
 }

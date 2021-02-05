@@ -1,6 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { FWA_STORE } from './fancy-weather.reducer';
-import { ICoordinates, IFancyWeatherState, IWeatherToday } from '../../../interfaces/interfaces';
+import {
+  ICoordinates,
+  IFancyWeatherState,
+  IWeatherToday,
+} from '../../../interfaces/interfaces';
 
 const GET_FEATURE = createFeatureSelector<IFancyWeatherState>(FWA_STORE);
 
@@ -32,4 +36,4 @@ export const getDateSelector = createSelector(
 export const getWeatherTodaySelectore = createSelector(
   GET_FEATURE,
   (state): IWeatherToday => state.weatherToday
-)
+);

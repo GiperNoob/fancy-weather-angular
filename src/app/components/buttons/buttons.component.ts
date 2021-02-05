@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import {Store} from '@ngrx/store';
-import {getImgAction} from '../inform/fancy-weather.actions';
+import { Store } from '@ngrx/store';
+import { getImgAction } from '../../store/fancy-weather-store/store/fancy-weather.actions';
 
 @Component({
   selector: 'app-buttons',
   templateUrl: './buttons.component.html',
-  styleUrls: ['./buttons.component.scss']
+  styleUrls: ['./buttons.component.scss'],
 })
 export class ButtonsComponent {
-  constructor(private store$: Store) {
-  }
+  constructor(private store$: Store) {}
 
   refreshBackGroundImg(): void {
     this.store$.dispatch(getImgAction());

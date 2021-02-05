@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import {interval, Observable} from 'rxjs';
-import { IMG_URL, IP_API_KEY, WEATHER_URL } from '../../../../constants/keys-constants';
-import { ICoordinates, IDataCoordinates, IIPUser } from '../../../../interfaces/interfaces';
-import {map, share} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { interval, Observable } from 'rxjs';
+import {
+  IMG_URL,
+  IP_API_KEY,
+  WEATHER_URL,
+} from '../../../../constants/keys-constants';
+import {
+  ICoordinates,
+  IDataCoordinates,
+  IIPUser,
+  IWeatherToday,
+} from '../../../../interfaces/interfaces';
+import { map, share } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FancyWeatherService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   getSrcImg(): Observable<IIPUser> {
     return this.httpClient.get<IIPUser>(IMG_URL);
@@ -29,7 +37,7 @@ export class FancyWeatherService {
     return data;
   }
 
-  getWeather():  Observable<any> {
+  getWeather(): Observable<any> {
     return this.httpClient.get<any>(WEATHER_URL);
   }
 
@@ -38,10 +46,18 @@ export class FancyWeatherService {
   }
 
   getClock(): Observable<Date> {
-    return interval(1000)
-      .pipe(
-        map(tick => new Date()),
-        share()
-      );
+    return interval(1000).pipe(
+      map((tick) => new Date()),
+      share()
+    );
+  }
+
+  transformWeather(body: any): IWeatherToday {
+    return {
+      temp: body.list[3].main.temp.toFixed(),
+      feelsLike: body.list[3].main.feels_like.toFixed(),
+      wind: body.list[3].wind.speed,
+      humidity: body.list[3].main.humidity,
+    };
   }
 }

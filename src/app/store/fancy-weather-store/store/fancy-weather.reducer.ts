@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { setBackgroundImageAction, setLatLngAction } from '../../../components/inform/fancy-weather.actions';
+import {
+  setBackgroundImageAction,
+  setLatLngAction,
+  setWeatherAction,
+} from './fancy-weather.actions';
 import { IFancyWeatherState } from '../../../interfaces/interfaces';
 
 export const FWA_STORE = 'store';
@@ -16,23 +20,15 @@ const FANCY_WEATHER_INIT_STATE: IFancyWeatherState = {
     feelsLike: 30,
     wind: 42,
     humidity: 60,
-  }
+  },
 };
 
 export const fancyWeatherReducer = createReducer(
   FANCY_WEATHER_INIT_STATE,
-  on(
-    setBackgroundImageAction,
-    (state, {src}) => ({...state, src})
-  ),
-  on(
-    setLatLngAction,
-    (
-      state,
-      {coordinates}
-    ) =>  ({
-      ...state,
-      coordinates,
-    })
-  ),
+  on(setBackgroundImageAction, (state, { src }) => ({ ...state, src })),
+  on(setLatLngAction, (state, { coordinates }) => ({ ...state, coordinates })),
+  on(setWeatherAction, (state, { weather }) => ({
+    ...state,
+    weatherToday: weather,
+  }))
 );

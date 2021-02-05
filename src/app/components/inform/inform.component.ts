@@ -8,7 +8,7 @@ import { FancyWeatherService } from '../../store/fancy-weather-store/store/servi
 @Component({
   selector: 'app-inform',
   templateUrl: './inform.component.html',
-  styleUrls: ['./inform.component.scss']
+  styleUrls: ['./inform.component.scss'],
 })
 export class InformComponent {
   clock: Observable<Date> = this.fancyWeatherService.getClock();
@@ -16,6 +16,6 @@ export class InformComponent {
 
   constructor(
     private store$: Store<IFancyWeatherState>,
-    private fancyWeatherService: FancyWeatherService,
+    private fancyWeatherService: FancyWeatherService
   ) {}
 }

@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getImgAction } from './components/inform/fancy-weather.actions';
+import { getImgAction } from './store/fancy-weather-store/store/fancy-weather.actions';
 import { Observable, Subscription } from 'rxjs';
 import { getSrcSelector } from './store/fancy-weather-store/store/fancy-weather.selectors';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
   src$!: Observable<string>;
@@ -19,7 +19,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store$.dispatch(getImgAction());
     this.src$ = this.store$.pipe(select(getSrcSelector));
-    this.subscription = this.src$.subscribe((src) => this.backGroundImage = `url(${src})`);
+    this.subscription = this.src$.subscribe(
+      (src) => (this.backGroundImage = `url(${src})`)
+    );
   }
 
   ngOnDestroy(): void {
