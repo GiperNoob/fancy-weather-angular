@@ -3,15 +3,17 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IWeatherToday } from 'src/app/interfaces/interfaces';
 import { getWeatherTodaySelectore } from 'src/app/store/fancy-weather-store/store/fancy-weather.selectors';
-import { getWeatherAction } from '../inform/fancy-weather.actions';
+import { getWeatherAction } from '../../store/fancy-weather-store/store/fancy-weather.actions';
 
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.scss']
+  styleUrls: ['./weather.component.scss'],
 })
-export class WeatherComponent implements OnInit, OnDestroy{
-  weatherToday: Observable<IWeatherToday> = this.store$.pipe(select(getWeatherTodaySelectore))
+export class WeatherComponent implements OnInit, OnDestroy {
+  weatherToday: Observable<IWeatherToday> = this.store$.pipe(
+    select(getWeatherTodaySelectore)
+  );
   temp!: number;
   feelsLike!: number;
   wind!: number;
@@ -33,4 +35,4 @@ export class WeatherComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.subscription.unsubscribe;
   }
- }
+}

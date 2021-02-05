@@ -7,7 +7,11 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import {DEFAULT_ROUTER_FEATURENAME, routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
+import {
+  DEFAULT_ROUTER_FEATURENAME,
+  routerReducer,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { ButtonsComponent } from './components/buttons/buttons.component';
 import { FormComponent } from './components/form/form.component';
@@ -36,20 +40,26 @@ import { MAP_KEY } from './constants/keys-constants';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({
-      [DEFAULT_ROUTER_FEATURENAME]: routerReducer
-    }, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot(
+      {
+        [DEFAULT_ROUTER_FEATURENAME]: routerReducer,
+      },
+      {}
+    ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: MAP_KEY
+      apiKey: MAP_KEY,
     }),
     FancyWeatherStoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
