@@ -15,7 +15,7 @@ export class MapComponent implements OnInit, OnDestroy {
     select(getCoordinates)
   );
   lat!: number;
-  lng!: number;
+  lon!: number;
   subscription!: Subscription;
 
   constructor(private store$: Store) {}
@@ -24,7 +24,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.store$.dispatch(getIPAction());
     this.subscription = this.coordinates$.subscribe((coordinates) => {
       this.lat = coordinates.lat;
-      this.lng = coordinates.lng;
+      this.lon = coordinates.lon;
     });
   }
 
