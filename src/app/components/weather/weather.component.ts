@@ -14,8 +14,8 @@ export class WeatherComponent implements OnInit, OnDestroy {
   weatherToday: Observable<IWeatherToday> = this.store$.pipe(
     select(getWeatherTodaySelectore)
   );
-  temp!: number;
-  feelsLike!: number;
+  temp!: string;
+  feelsLike!: string;
   wind!: number;
   humidity!: number;
   subscription!: Subscription;
