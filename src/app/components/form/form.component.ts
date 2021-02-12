@@ -13,7 +13,9 @@ export class FormComponent implements OnInit {
     this.createForm();
   }
 
-  public onSubmit(): void {}
+  public onSubmit(): void {
+    console.log(this.form);
+  }
 
   private createForm(): void {
     this.form = new FormGroup({

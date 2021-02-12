@@ -7,7 +7,7 @@ import {
   getCountry,
   getDateSelector,
 } from '../../store/fancy-weather-store/store/fancy-weather.selectors';
-import { FancyWeatherService } from '../../store/fancy-weather-store/store/services/fancy-weather.service';
+import { getClock } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-inform',
@@ -15,13 +15,10 @@ import { FancyWeatherService } from '../../store/fancy-weather-store/store/servi
   styleUrls: ['./inform.component.scss'],
 })
 export class InformComponent {
-  clock: Observable<Date> = this.fancyWeatherService.getClock();
+  clock: Observable<Date> = getClock();
   date: Observable<number> = this.store$.pipe(select(getDateSelector));
   country: Observable<string> = this.store$.pipe(select(getCountry));
   city: Observable<string> = this.store$.pipe(select(getCity));
 
-  constructor(
-    private store$: Store<IFancyWeatherState>,
-    private fancyWeatherService: FancyWeatherService
-  ) {}
+  constructor(private store$: Store<IFancyWeatherState>) {}
 }
