@@ -10,6 +10,11 @@ import {
 } from './fancy-weather.actions';
 import { map, switchMap } from 'rxjs/operators';
 import { FancyWeatherService } from './services/fancy-weather.service';
+import {
+  getCoordinates,
+  getUrlImage,
+  transformWeather,
+} from 'src/app/utils/utils';
 
 @Injectable()
 export class FancyWeatherEffects {
@@ -19,13 +24,7 @@ export class FancyWeatherEffects {
       switchMap(() =>
         this.fancyWeatherService
           .getSrcImg()
-          .pipe(
-            map((data) =>
-              setBackgroundImageAction(
-                this.fancyWeatherService.getUrlImage(data)
-              )
-            )
-          )
+          .pipe(map((data) => setBackgroundImageAction(getUrlImage(data))))
       )
     )
   );
@@ -36,13 +35,7 @@ export class FancyWeatherEffects {
       switchMap(() =>
         this.fancyWeatherService
           .getWeather()
-          .pipe(
-            map((weather) =>
-              setWeatherAction(
-                this.fancyWeatherService.transformWeather(weather)
-              )
-            )
-          )
+          .pipe(map((weather) => setWeatherAction(transformWeather(weather))))
       )
     )
   );
@@ -53,11 +46,7 @@ export class FancyWeatherEffects {
       switchMap(() =>
         this.fancyWeatherService
           .getIP()
-          .pipe(
-            map((data) =>
-              setLatLngAction(this.fancyWeatherService.getCoordinates(data))
-            )
-          )
+          .pipe(map((data) => setLatLngAction(getCoordinates(data))))
       )
     )
   );

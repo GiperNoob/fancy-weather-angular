@@ -22,7 +22,7 @@ export interface IWeatherInfo {
 
 export interface ICity {
   id: number;
-  name: 'Vitebsk';
+  name: string;
   coord: ICoordinates;
   country: string;
   population: number;

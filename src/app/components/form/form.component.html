@@ -6,7 +6,12 @@
     placeholder="Search city"
   />
 
-  <button class="btn btn-submit" type="submit" [disabled]="form.invalid">
+  <button
+    class="btn btn-submit"
+    type="submit"
+    [disabled]="form.invalid"
+    [ngClass]="{ invalid: form.invalid }"
+  >
     {{ "search" | uppercase }}
   </button>
 </form>
