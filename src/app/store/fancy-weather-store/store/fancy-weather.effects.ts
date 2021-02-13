@@ -3,15 +3,15 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   setBackgroundImageAction,
   getImgAction,
-  getIPAction,
-  setLatLngAction,
+  getIPDataAction,
+  setCoordinatesAndIPAction,
   getWeatherAction,
   setWeatherAction,
 } from './fancy-weather.actions';
 import { map, switchMap } from 'rxjs/operators';
 import { FancyWeatherService } from './services/fancy-weather.service';
 import {
-  getCoordinates,
+  getInitData,
   getUrlImage,
   transformWeather,
 } from 'src/app/utils/utils';
@@ -42,11 +42,11 @@ export class FancyWeatherEffects {
 
   getIP$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getIPAction),
+      ofType(getIPDataAction),
       switchMap(() =>
         this.fancyWeatherService
           .getIP()
-          .pipe(map((data) => setLatLngAction(getCoordinates(data))))
+          .pipe(map((data) => setCoordinatesAndIPAction(getInitData(data))))
       )
     )
   );

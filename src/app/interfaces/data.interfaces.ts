@@ -1,4 +1,4 @@
-export interface IDataCoordinates {
+export interface IDataIpUser {
   city: string;
   country: string;
   hostname: string;
@@ -18,7 +18,7 @@ export interface IUrls {
   thumb: string;
 }
 
-export interface IIPUser {
+export interface IDataImage {
   alt_description: string;
   blur_hash: string;
   categories: [];

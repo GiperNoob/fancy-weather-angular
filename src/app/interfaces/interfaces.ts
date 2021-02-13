@@ -3,6 +3,11 @@ export interface ICoordinates {
   lon: number;
 }
 
+export interface IInitData {
+  geoInfo: IGeoInfo;
+  coordinates: ICoordinates;
+}
+
 export interface IWeatherToday {
   temp: string;
   feelsLike: string;
