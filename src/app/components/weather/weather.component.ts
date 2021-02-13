@@ -3,7 +3,6 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IWeatherToday } from 'src/app/interfaces/interfaces';
 import { getWeatherTodaySelectore } from 'src/app/store/fancy-weather-store/store/fancy-weather.selectors';
-import { getWeatherAction } from '../../store/fancy-weather-store/store/fancy-weather.actions';
 
 @Component({
   selector: 'app-weather',
@@ -22,8 +21,6 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   constructor(private store$: Store) {}
   ngOnInit(): void {
-    this.store$.dispatch(getWeatherAction());
-
     this.subscription = this.weatherToday.subscribe((weather) => {
       this.temp = weather.temp;
       this.feelsLike = weather.feelsLike;

@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import {
   setBackgroundImageAction,
-  setCoordinatesAndIPAction,
+  setInitDataAction,
   setWeatherAction,
 } from './fancy-weather.actions';
 import { IFancyWeatherState } from '../../../interfaces/interfaces';
@@ -30,7 +30,7 @@ const FANCY_WEATHER_INIT_STATE: IFancyWeatherState = {
 export const fancyWeatherReducer = createReducer(
   FANCY_WEATHER_INIT_STATE,
   on(setBackgroundImageAction, (state, { src }) => ({ ...state, src })),
-  on(setCoordinatesAndIPAction, (state, { initData }) => ({
+  on(setInitDataAction, (state, { initData }) => ({
     ...state,
     coordinates: initData.coordinates,
     geoInfo: initData.geoInfo,
