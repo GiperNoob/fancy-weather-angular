@@ -1,21 +1,25 @@
 import { Observable, interval } from 'rxjs';
 import { map, share } from 'rxjs/operators';
-import { IDataCoordinates, IIPUser } from '../interfaces/data.interfaces';
-import { ICoordinates, IInform } from '../interfaces/interfaces';
+import { IDataIpUser, IDataImage } from '../interfaces/data.interfaces';
+import { IInform, IInitData } from '../interfaces/interfaces';
 import { IWeatherAPI } from '../interfaces/weatherAPI.interfaces';
 
-export function getCoordinates(coordinates: IDataCoordinates): ICoordinates {
-  const city = coordinates.city;
-  const coordinatesArray = coordinates.loc.split(',');
-  const data = {
-    city,
-    lat: Number(coordinatesArray[0]),
-    lon: Number(coordinatesArray[1]),
+export function getInitData(dataIP: IDataIpUser): IInitData {
+  const coordinatesArray = dataIP.loc.split(',');
+  const initData = {
+    geoInfo: {
+      country: dataIP.country,
+      city: dataIP.city,
+    },
+    coordinates: {
+      lat: Number(coordinatesArray[0]),
+      lon: Number(coordinatesArray[1]),
+    },
   };
-  return data;
+  return initData;
 }
 
-export function getUrlImage(data: IIPUser): string {
+export function getUrlImage(data: IDataImage): string {
   return data.urls.regular;
 }
 

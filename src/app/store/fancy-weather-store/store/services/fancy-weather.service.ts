@@ -7,7 +7,7 @@ import {
   WEATHER_URL,
 } from '../../../../constants/keys-constants';
 import { IWeatherAPI } from 'src/app/interfaces/weatherAPI.interfaces';
-import { IIPUser, IDataCoordinates } from 'src/app/interfaces/data.interfaces';
+import { IDataImage, IDataIpUser } from 'src/app/interfaces/data.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +15,12 @@ import { IIPUser, IDataCoordinates } from 'src/app/interfaces/data.interfaces';
 export class FancyWeatherService {
   constructor(private httpClient: HttpClient) {}
 
-  getSrcImg(): Observable<IIPUser> {
-    return this.httpClient.get<IIPUser>(IMG_URL);
+  getSrcImg(): Observable<IDataImage> {
+    return this.httpClient.get<IDataImage>(IMG_URL);
   }
 
-  getIP(): Observable<IDataCoordinates> {
-    return this.httpClient.get<IDataCoordinates>(IP_API_KEY);
+  getIP(): Observable<IDataIpUser> {
+    return this.httpClient.get<IDataIpUser>(IP_API_KEY);
   }
 
   getWeather(): Observable<IWeatherAPI> {

@@ -1,6 +1,6 @@
 import { createAction } from '@ngrx/store';
 import { FancyWeatherActions } from '../../../constants/action-constants';
-import { ICoordinates, IInform } from '../../../interfaces/interfaces';
+import { IInform, IInitData } from '../../../interfaces/interfaces';
 
 export const setBackgroundImageAction = createAction(
   FancyWeatherActions.SET_BACKGROUND_IMAGE,
@@ -11,11 +11,13 @@ export const getImgAction = createAction(
   FancyWeatherActions.GET_SRC_IMG_ACTION
 );
 
-export const getIPAction = createAction(FancyWeatherActions.GET_IP_ACTION);
+export const getIPDataAction = createAction(
+  FancyWeatherActions.GET_IP_DATA_ACTION
+);
 
-export const setLatLngAction = createAction(
-  FancyWeatherActions.SET_LAT_LNG_ACTION,
-  (coordinates: ICoordinates) => ({ coordinates })
+export const setCoordinatesAndIPAction = createAction(
+  FancyWeatherActions.SET_INIT_DATA_ACTION,
+  (initData: IInitData) => ({ initData })
 );
 
 export const getWeatherAction = createAction(
