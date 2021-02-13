@@ -4,7 +4,7 @@ import {
   setBackgroundImageAction,
   getImgAction,
   getIPDataAction,
-  setCoordinatesAndIPAction,
+  setInitDataAction,
   getWeatherAction,
   setWeatherAction,
 } from './fancy-weather.actions';
@@ -46,8 +46,15 @@ export class FancyWeatherEffects {
       switchMap(() =>
         this.fancyWeatherService
           .getIP()
-          .pipe(map((data) => setCoordinatesAndIPAction(getInitData(data))))
+          .pipe(map((data) => setInitDataAction(getInitData(data))))
       )
+    )
+  );
+
+  getWeatherAfterInitData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(setInitDataAction),
+      switchMap(async () => getWeatherAction())
     )
   );
 

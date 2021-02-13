@@ -15,7 +15,7 @@ export const getIPDataAction = createAction(
   FancyWeatherActions.GET_IP_DATA_ACTION
 );
 
-export const setCoordinatesAndIPAction = createAction(
+export const setInitDataAction = createAction(
   FancyWeatherActions.SET_INIT_DATA_ACTION,
   (initData: IInitData) => ({ initData })
 );

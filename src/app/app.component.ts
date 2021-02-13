@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getImgAction } from './store/fancy-weather-store/store/fancy-weather.actions';
+import {
+  getImgAction,
+  getIPDataAction,
+} from './store/fancy-weather-store/store/fancy-weather.actions';
 import { Observable, Subscription } from 'rxjs';
 import { getSrcSelector } from './store/fancy-weather-store/store/fancy-weather.selectors';
 
@@ -17,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private store$: Store) {}
 
   ngOnInit(): void {
+    this.store$.dispatch(getIPDataAction());
     this.store$.dispatch(getImgAction());
     this.src$ = this.store$.pipe(select(getSrcSelector));
     this.subscription = this.src$.subscribe(
