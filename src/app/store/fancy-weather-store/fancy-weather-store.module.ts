@@ -14,5 +14,6 @@ import { FancyWeatherEffects } from './store/fancy-weather.effects';
     StoreModule.forFeature(FWA_STORE, fancyWeatherReducer),
     EffectsModule.forFeature([FancyWeatherEffects]),
   ],
+  providers: [],
 })
 export class FancyWeatherStoreModule {}

@@ -23,7 +23,7 @@ import { DegreesComponent } from './components/degrees/degrees.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import { FancyWeatherStoreModule } from './store/fancy-weather-store/fancy-weather-store.module';
-import { MAP_KEY } from './constants/keys-constants';
+import { MAP_KEY } from './constants/keys-constants.service';
 
 @NgModule({
   declarations: [
