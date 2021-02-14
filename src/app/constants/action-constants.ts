@@ -5,4 +5,5 @@ export enum FancyWeatherActions {
   SET_INIT_DATA_ACTION = '[SET IP DATA ACTION] set init data for app(AGM, GeoInfo)',
   GET_WEATHER_ACTION = '[GET WEATHER ACTION] get weather',
   SET_WEATHER_ACTION = '[SET WEATHER ACTION] set weather',
+  CITY_SEARCH_ACTION = '[CITY SEARCH ACTION] city search',
 }

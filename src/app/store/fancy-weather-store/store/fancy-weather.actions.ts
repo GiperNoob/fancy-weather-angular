@@ -28,3 +28,8 @@ export const setWeatherAction = createAction(
   FancyWeatherActions.SET_WEATHER_ACTION,
   (inform: IInform) => ({ inform })
 );
+
+export const setCitySearchAction = createAction(
+  FancyWeatherActions.CITY_SEARCH_ACTION,
+  (city: string) => ({ city })
+);

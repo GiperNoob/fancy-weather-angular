@@ -1,10 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import {
   setBackgroundImageAction,
+  setCitySearchAction,
   setInitDataAction,
   setWeatherAction,
 } from './fancy-weather.actions';
 import { IFancyWeatherState } from '../../../interfaces/interfaces';
+import { state } from '@angular/animations';
 
 export const FWA_STORE = 'store';
 
@@ -40,5 +42,9 @@ export const fancyWeatherReducer = createReducer(
     weatherToday: inform.weather,
     geoInfo: inform.geoInfo,
     coordinates: inform.coordinates,
+  })),
+  on(setCitySearchAction, (state, { city }) => ({
+    ...state,
+    geoInfo: { ...state.geoInfo, city },
   }))
 );

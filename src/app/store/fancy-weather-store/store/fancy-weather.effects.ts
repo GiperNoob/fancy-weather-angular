@@ -7,8 +7,9 @@ import {
   setInitDataAction,
   getWeatherAction,
   setWeatherAction,
+  setCitySearchAction,
 } from './fancy-weather.actions';
-import { map, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { FancyWeatherService } from './services/fancy-weather.service';
 import {
   getInitData,
@@ -54,6 +55,14 @@ export class FancyWeatherEffects {
   getWeatherAfterInitData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(setInitDataAction),
+      switchMap(async () => getWeatherAction())
+    )
+  );
+
+  getWeatherAfterSearch$ = createEffect(() =>
+    this.actions$.pipe(
+      distinctUntilChanged(),
+      ofType(setCitySearchAction),
       switchMap(async () => getWeatherAction())
     )
   );

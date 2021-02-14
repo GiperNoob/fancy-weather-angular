@@ -31,6 +31,7 @@ export function getClock(): Observable<Date> {
 }
 
 export function transformWeather(body: IWeatherAPI): IInform {
+  console.log(body);
   return {
     weather: {
       temp: body.list[3].main.temp.toFixed(),
