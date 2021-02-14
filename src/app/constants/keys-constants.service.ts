@@ -14,8 +14,7 @@ export class KeysService {
   public WEATHER_URL!: string;
   constructor(private store$: Store<IFancyWeatherState>) {
     this.store$
-      .pipe(select(getCity))
-      .pipe(skip(1), take(1))
+      .pipe(select(getCity), skip(1))
       .subscribe(
         (city) =>
           (this.WEATHER_URL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=ua&units=metric&APPID=a9a3a62789de80865407c0452e9d1c27`)

@@ -9,8 +9,8 @@
   <button
     class="btn btn-submit"
     type="submit"
-    [disabled]="form.invalid"
-    [ngClass]="{ invalid: form.invalid }"
+    [disabled]="form.invalid || (isValid | async)"
+    [ngClass]="{ invalid: form.invalid || (isValid | async) }"
   >
     {{ "search" | uppercase }}
   </button>
