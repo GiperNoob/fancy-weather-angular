@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { IFancyWeatherState } from 'src/app/interfaces/interfaces';
 import { setCitySearchAction } from 'src/app/store/fancy-weather-store/store/fancy-weather.actions';
+import { FancyWeatherService } from 'src/app/store/fancy-weather-store/store/services/fancy-weather.service';
 
 @Component({
   selector: 'app-form',
@@ -15,12 +16,15 @@ export class FormComponent implements OnInit, OnDestroy {
   public isValid = new BehaviorSubject<boolean>(true);
   private subscription!: Subscription;
 
-  constructor(private store$: Store<IFancyWeatherState>) {}
+  constructor(
+    private store$: Store<IFancyWeatherState>,
+    public fancyWeatherService: FancyWeatherService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
     this.subscription = this.form.valueChanges.subscribe(() => {
-      if (this.form.get('searchField')?.value.length >= 2) {
+      if (this.form.get('searchField')?.value.trim().length >= 2) {
         this.isValid.next(false);
       }
     });

@@ -9,13 +9,15 @@ import {
   setWeatherAction,
   setCitySearchAction,
 } from './fancy-weather.actions';
-import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { FancyWeatherService } from './services/fancy-weather.service';
 import {
   getInitData,
   getUrlImage,
   transformWeather,
 } from 'src/app/utils/utils';
+import { of } from 'rxjs';
+import { IWeatherAPI } from 'src/app/interfaces/weatherAPI.interfaces';
 
 @Injectable()
 export class FancyWeatherEffects {
@@ -34,9 +36,13 @@ export class FancyWeatherEffects {
     this.actions$.pipe(
       ofType(getWeatherAction),
       switchMap(() =>
-        this.fancyWeatherService
-          .getWeather()
-          .pipe(map((weather) => setWeatherAction(transformWeather(weather))))
+        this.fancyWeatherService.getWeather().pipe(
+          catchError((err) => {
+            this.fancyWeatherService.errorMessage.next(err.error.message);
+            return of({} as IWeatherAPI);
+          }),
+          map((weather) => setWeatherAction(transformWeather(weather)))
+        )
       )
     )
   );
@@ -61,9 +67,13 @@ export class FancyWeatherEffects {
 
   getWeatherAfterSearch$ = createEffect(() =>
     this.actions$.pipe(
-      distinctUntilChanged(),
       ofType(setCitySearchAction),
-      switchMap(async () => getWeatherAction())
+      switchMap(async () => {
+        if (this.fancyWeatherService.errorMessage.getValue()) {
+          this.fancyWeatherService.errorMessage.next('');
+        }
+        return getWeatherAction();
+      })
     )
   );
 
