@@ -31,18 +31,21 @@ export function getClock(): Observable<Date> {
 }
 
 export function transformWeather(body: IWeatherAPI): IInform {
-  console.log(body);
-  return {
-    weather: {
-      temp: body.list[3].main.temp.toFixed(),
-      feelsLike: body.list[3].main.feels_like.toFixed(),
-      wind: body.list[3].wind.speed,
-      humidity: body.list[3].main.humidity,
-    },
-    coordinates: body.city.coord,
-    geoInfo: {
-      country: body.city.country,
-      city: body.city.name,
-    },
-  };
+  if (body.list && body.city) {
+    return {
+      weather: {
+        temp: body.list[3].main.temp.toFixed(),
+        feelsLike: body.list[3].main.feels_like.toFixed(),
+        wind: body.list[3].wind.speed,
+        humidity: body.list[3].main.humidity,
+      },
+      coordinates: body.city.coord,
+      geoInfo: {
+        country: body.city.country,
+        city: body.city.name,
+      },
+    };
+  } else {
+    return {} as IInform;
+  }
 }

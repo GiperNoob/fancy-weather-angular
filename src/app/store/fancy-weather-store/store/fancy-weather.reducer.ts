@@ -6,7 +6,6 @@ import {
   setWeatherAction,
 } from './fancy-weather.actions';
 import { IFancyWeatherState } from '../../../interfaces/interfaces';
-import { state } from '@angular/animations';
 
 export const FWA_STORE = 'store';
 
@@ -37,12 +36,18 @@ export const fancyWeatherReducer = createReducer(
     coordinates: initData.coordinates,
     geoInfo: initData.geoInfo,
   })),
-  on(setWeatherAction, (state, { inform }) => ({
-    ...state,
-    weatherToday: inform.weather,
-    geoInfo: inform.geoInfo,
-    coordinates: inform.coordinates,
-  })),
+  on(setWeatherAction, (state, { inform }) => {
+    if (inform.coordinates && inform.geoInfo && inform.weather) {
+      return {
+        ...state,
+        weatherToday: inform.weather,
+        geoInfo: inform.geoInfo,
+        coordinates: inform.coordinates,
+      };
+    } else {
+      return { ...state };
+    }
+  }),
   on(setCitySearchAction, (state, { city }) => ({
     ...state,
     geoInfo: { ...state.geoInfo, city },

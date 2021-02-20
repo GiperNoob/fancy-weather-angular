@@ -1,17 +1,23 @@
-<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-  <input
-    formControlName="searchField"
-    type="text"
-    class="search-field"
-    placeholder="Search city"
-  />
+<div>
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <input
+      formControlName="searchField"
+      type="text"
+      class="search-field"
+      placeholder="Search city"
+    />
 
-  <button
-    class="btn btn-submit"
-    type="submit"
-    [disabled]="form.invalid || (isValid | async)"
-    [ngClass]="{ invalid: form.invalid || (isValid | async) }"
+    <button
+      class="btn btn-submit"
+      type="submit"
+      [disabled]="form.invalid || (isValid | async)"
+      [ngClass]="{ invalid: form.invalid || (isValid | async) }"
+    >
+      {{ "search" | uppercase }}
+    </button>
+  </form>
+  <span class="error" *ngIf="fancyWeatherService.errorMessage | async"
+    >{{ fancyWeatherService.errorMessage | async }}, input correct city,
+    please</span
   >
-    {{ "search" | uppercase }}
-  </button>
-</form>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { KeysService } from '../../../../constants/keys-constants.service';
 import { IWeatherAPI } from 'src/app/interfaces/weatherAPI.interfaces';
 import { IDataImage, IDataIpUser } from 'src/app/interfaces/data.interfaces';
@@ -9,6 +9,7 @@ import { IDataImage, IDataIpUser } from 'src/app/interfaces/data.interfaces';
   providedIn: 'root',
 })
 export class FancyWeatherService {
+  public errorMessage = new BehaviorSubject<string>('');
   constructor(
     private httpClient: HttpClient,
     private keysService: KeysService
